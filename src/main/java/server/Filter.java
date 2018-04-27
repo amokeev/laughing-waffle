@@ -1,5 +1,7 @@
 package server;
 
+import server.external.DistanceCalculator;
+import server.pojo.City;
 import server.pojo.Entry;
 
 /**
@@ -91,6 +93,18 @@ public class Filter {
     }
 }
 
+class DistanceCriteria extends RangeCriteria {
+    City myCity;
+
+    public DistanceCriteria(City myCity) {
+        this.myCity = myCity;
+    }
+    public boolean pass(City targetCity) {
+        double distance = DistanceCalculator.instance().get(myCity, targetCity);
+        return pass(distance);
+    }
+}
+
 class RangeCriteria {
     public static final double min = Double.MIN_VALUE;
     public static final double max = Double.MAX_VALUE;
@@ -133,6 +147,7 @@ class RangeCriteria {
         return val >= minValue && val <=maxValue;
     }
 }
+
 
 class BooleanCriteria {
     boolean target;
