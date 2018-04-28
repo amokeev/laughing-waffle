@@ -1,6 +1,7 @@
 package server;
 
 import org.junit.Test;
+import server.pojo.City;
 import server.pojo.Entry;
 
 import static org.junit.Assert.*;
@@ -167,7 +168,32 @@ public class FilterTest {
 
     @Test
     public void setDistance() throws Exception {
+        //Let's set our location for the test
+        Entry e0 = new Entry().setCity(new City().setLat(10).setLon(10));
+        Context.instance().setMe(e0);
 
+
+        Entry e15km = new Entry().setCity(new City().setLat(10.1).setLon(10.1));
+        Entry e40km = new Entry().setCity(new City().setLat(10.2).setLon(10.3));
+        Entry e1085km = new Entry().setCity(new City().setLat(17).setLon(17));
+
+        Filter filter1 = new Filter().setDistance(7);//Default <30 has to be set
+        Filter filter2 = new Filter().setDistance(50);
+        Filter filter3 = new Filter().setDistance(305); //Default >300 has to be set
+
+        assertTrue(filter1.pass(e15km));
+        assertFalse(filter1.pass(e40km));
+        assertFalse(filter1.pass(e1085km));
+
+
+        assertTrue(filter2.pass(e15km));
+        assertTrue(filter2.pass(e40km));
+        assertFalse(filter2.pass(e1085km));
+
+
+        assertTrue(filter3.pass(e15km));
+        assertTrue(filter3.pass(e40km));
+        assertTrue(filter3.pass(e1085km));
     }
 
     //TODO: test filter combinations

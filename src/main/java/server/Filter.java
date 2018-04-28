@@ -15,7 +15,7 @@ public class Filter {
     RangeCriteria score = null;
     RangeCriteria age = null;
     RangeCriteria height = null;
-    RangeCriteria distance = null;
+    DistanceCriteria distance = null;
 
 
     public Filter() {
@@ -69,14 +69,14 @@ public class Filter {
     }
 
     public Filter setHeightMax(int val) {
-        System.out.println("SHM" + val);
         if(height == null) height = new RangeCriteria(135, RangeCriteria.max);
         height.setMax(val);
         return this;
     }
     public Filter setDistance(int dst) {
-        distance = new RangeCriteria(0,RangeCriteria.max);
+        distance = new DistanceCriteria(Context.instance().me().getCity());
         if (dst > 30) distance.setMax(dst);
+        else distance.setMax(30);
         if (dst >= 300) distance.setMax(RangeCriteria.max);
         return this;
     }
@@ -88,7 +88,8 @@ public class Filter {
         if (score != null && !score.pass(entry.score())) return false;
         if (age != null && !age.pass(entry.age())) return false;
         if (height != null && !height.pass(entry.getHeight_in_cm())) return false;
-//        if (distance != null && !distance.pass(entry.get))
+        if (distance != null && !distance.pass(entry.getCity())) return false;
+
         return true;
     }
 }
@@ -97,10 +98,12 @@ class DistanceCriteria extends RangeCriteria {
     City myCity;
 
     public DistanceCriteria(City myCity) {
+        super(0,max);
         this.myCity = myCity;
     }
     public boolean pass(City targetCity) {
         double distance = DistanceCalculator.instance().get(myCity, targetCity);
+        //System.out.println("D:" + distance);
         return pass(distance);
     }
 }
@@ -142,8 +145,8 @@ class RangeCriteria {
     }
 
     public boolean pass(double val) {
-        System.out.println("RANGE CHECK " + val);
-        System.out.println( minValue  +":" + maxValue);
+        //System.out.println("RANGE CHECK " + val);
+        //System.out.println( minValue  +":" + maxValue);
         return val >= minValue && val <=maxValue;
     }
 }

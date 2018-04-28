@@ -29,6 +29,10 @@ public class PeopleDAOStub implements PeopleDAO {
         return result;
     }
 
+    public List<Entry> get() {
+        return entries;
+    }
+
     public List<Entry> get(Filter filter) {
         return filter(entries, filter);
     }

@@ -31,6 +31,9 @@ public class City {
         return this;
     }
 
+    public String toString() {
+        return name + ":" + lat + ":" +lon;
+    }
     //"name": "London",
     private String name;
     //"lat": 51.509865,
