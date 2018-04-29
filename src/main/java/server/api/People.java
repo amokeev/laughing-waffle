@@ -26,15 +26,15 @@ public class People {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public FilteredEntries filter(@QueryParam("hasPhoto") String hasPhoto,
-                                  @QueryParam("inContact") String inContact,
+    public FilteredEntries filter(@QueryParam("has_photo") String hasPhoto,
+                                  @QueryParam("contact") String inContact,
                                   @QueryParam("favorite") String favorite,
-                                  @QueryParam("compatibilityScoreMin") double compatibilityScoreMin,
-                                  @QueryParam("compatibilityScoreMax") double compatibilityScoreMax,
-                                  @QueryParam("ageMin") int ageMin, @QueryParam("ageMax") int ageMax,
-                                  @QueryParam("heightMin") int heightMin, @QueryParam("heightMax") int heightMax,
+                                  @QueryParam("compatibility_score_min") double compatibilityScoreMin,
+                                  @QueryParam("compatibility_score_max") double compatibilityScoreMax,
+                                  @QueryParam("age_min") int ageMin, @QueryParam("age_max") int ageMax,
+                                  @QueryParam("height_min") int heightMin, @QueryParam("height_max") int heightMax,
                                   @QueryParam("distance") int distance) {
-        log.info("Filtering " + hasPhoto + "," + inContact + "," +  favorite + "," +  compatibilityScoreMin + "," +  ageMin + "," +  heightMin + "," +  distance);
+        log.info("Filtering " + hasPhoto + "," + inContact + "," +  favorite + "," +  compatibilityScoreMin + "-" +  compatibilityScoreMax + "," +  ageMin + "-" +  ageMax + "," +  heightMin + "-" +  heightMax + "," +  distance);
         Filter flt = new Filter();
         if(hasPhoto != null) flt.setPhoto(Boolean.parseBoolean(hasPhoto));
         if(inContact != null) flt.setContact(Boolean.parseBoolean(inContact));
