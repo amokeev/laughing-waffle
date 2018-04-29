@@ -8,6 +8,7 @@ class ReadPeopleComponent extends React.Component {
     this.requestFromServer = this.requestFromServer.bind(this);
     this.state = {
       people:[],
+      _filter:{},
       filter:{}
     }
   }
@@ -16,21 +17,26 @@ class ReadPeopleComponent extends React.Component {
     componentDidMount() {
       this.requestFromServer()
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      if(prevState.filter != this.state.filter) {
+        this.requestFromServer()
+      }
+    }
 
     // on unmount, kill fetching if anything is still pending
     componentWillUnmount() {
         this.serverRequest.abort();
     }
 
+    //We are accumulating filter changes in _filter
     filterChangeHandler(event) {
-      console.log(this.state.filter)
       var prop = event.target.name
       var value = event.target.value
       this.setState(function(prevState, props) {
-        var newFilter = prevState.filter;
+        var newFilter = prevState._filter;
         newFilter[prop] = value;
         return {
-          filter: newFilter
+          _filter: newFilter
         }
       });
     }
@@ -56,31 +62,35 @@ class ReadPeopleComponent extends React.Component {
 
     applyHandler(event) {
       console.log("Apply")
-      this.requestFromServer()
+      event.preventDefault()
+      this.setState(function(prevState, props) {
+        return {
+          filter: prevState._filter
+        }
+      });
     }
     resetHandler(event) {
       console.log("Reset")
-      this.setState({filter: {}});
+      event.preventDefault();
+      this.setState({filter: {},_filter: {}});
     }
 
 
     // render component on the page
     render() {
         var filteredEntries = this.state.people;
-        // $('.page-header h1').text('Filter Matches');
-
 
         return (
           <div className="row">
-            <div className="col-sm-4">
+            <div className="col-sm-5">
                   <Filters
-                    filters = {this.state.filter}
+                    filters = {this.state._filter}
                     changeHandler = {this.filterChangeHandler}
                     applyHandler = {this.applyHandler}
                     resetHandler = {this.resetHandler}
                     changeAppMode={this.props.changeAppMode} />
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-7">
                   <PeopleTable
                       people={filteredEntries}
                       changeAppMode={this.props.changeAppMode} />
@@ -92,9 +102,7 @@ class ReadPeopleComponent extends React.Component {
 
   window.ReadPeopleComponent = React.createClass({
       render: function() {
-      return (
-        <ReadPeopleComponent />
-      )
+      return (<ReadPeopleComponent />)
       }
     }
 );
