@@ -26,7 +26,7 @@ public class PeopleTest {
     public static void initSpec(){
         spec = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
-                .setBaseUri("http://localhost:8081/")
+                .setBaseUri("http://localhost:8080/")
                 .addFilter(new ResponseLoggingFilter())
                 .addFilter(new RequestLoggingFilter())
                 .build();
