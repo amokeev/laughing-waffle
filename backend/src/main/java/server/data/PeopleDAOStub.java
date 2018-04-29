@@ -1,4 +1,4 @@
-package server.dao;
+package server.data;
 
 import com.google.gson.reflect.TypeToken;
 import server.pojo.Entry;

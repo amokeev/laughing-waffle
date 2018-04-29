@@ -1,10 +1,7 @@
 package server.external;
 
 import org.junit.Test;
-import server.dao.PeopleDAOStub;
 import server.pojo.City;
-
-import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 

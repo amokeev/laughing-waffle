@@ -1,8 +1,6 @@
 package server;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import server.dao.PeopleDAOStub;
+import server.data.PeopleDAOStub;
 import server.pojo.Entry;
 
 /**

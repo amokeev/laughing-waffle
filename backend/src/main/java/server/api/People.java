@@ -2,8 +2,8 @@ package server.api;
 
 import server.Filter;
 import server.FilteredEntries;
-import server.dao.PeopleDAO;
-import server.dao.PeopleDAOStub;
+import server.data.PeopleDAO;
+import server.data.PeopleDAOStub;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

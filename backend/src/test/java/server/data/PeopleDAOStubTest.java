@@ -1,4 +1,4 @@
-package server.dao;
+package server.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
