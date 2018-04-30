@@ -2,7 +2,7 @@
 
 ### BUILD
 
-Use one of the below commands, for your preference.
+Use one of the below commands, if you prefer zip or docker distributions respectively.
 
 * *./gradlew distZip* #The distribution will be created at *build/distributions/filter-1.0.zip*
 * *./gradlew docker* #The docker image *filter-backend:1.0* will be created
