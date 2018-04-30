@@ -1,13 +1,13 @@
 ## Sample Filter backend code
 
-###BUILD
+### BUILD
 
 Use one of the below commands, for your preference.
 
 * *./gradlew distZip* #The distribution will be created at *build/distributions/filter-1.0.zip*
 * *./gradlew docker* #The docker image *filter-backend:1.0* will be created
 
-###RUN
+### RUN
 
 This expose REST API on the localhost, port 8080. The only endpoint is GET /people?<...filter parameters...>. 
 To verify that server is up: 
@@ -30,7 +30,7 @@ or
 
 (The server can be stopped by ./gradlew dockerStop. If unsure about the status, then *docker ps* and *docker stop "id"*)
 
-###SOURCES
+### SOURCES
 
 The project sources are split, check them out for details. 
 
@@ -38,8 +38,7 @@ The project sources are split, check them out for details.
 * [src/test](src/test)
 * [src/integTest](src/integTest)
 
-###DEVELOPMENT
+### DEVELOPMENT
 
 * ./gradlew test
 * ./gradlew integTest
-
