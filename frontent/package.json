@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Static web frontend for Sample Filter",
   "scripts": {
-    "start":"docker run -p 8080:8080 -d filter-backend:1.0 && http-server public",
+    "start": "docker run -p 8080:8080 -d filter-backend:1.0;http-server public",
     "test": "mocha --no-timeouts 'test/test-*.js'"
   },
   "dependencies": {
